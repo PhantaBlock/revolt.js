@@ -140,9 +140,7 @@ export class User {
      * Send a friend request to a user
      */
     async addFriend() {
-        return await this.client.api.post(`/users/friend`, {
-            username: this.username + "#" + this.discriminator,
-        });
+        return await this.client.api.put(`/users/${this._id as ""}/friend`);
     }
 
     /**
