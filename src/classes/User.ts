@@ -257,9 +257,7 @@ export class User {
    * Send a friend request to a user
    */
   async addFriend() {
-    const user = await this.#collection.client.api.post(`/users/friend`, {
-      username: this.username,
-    });
+    const user = await this.#collection.client.api.put(`/users/${this.id as ""}/friend`);
 
     return this.#collection.getOrCreate(user._id, user);
   }
