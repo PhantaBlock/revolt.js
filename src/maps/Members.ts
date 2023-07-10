@@ -69,6 +69,8 @@ export class Member {
         this._id = data._id;
         this.joined_at = new Date(data.joined_at);
 
+        // @ts-ignore-next-line
+        this.avatar_url = toNullable(data.avatar_url);
         this.nickname = toNullable(data.nickname);
         this.avatar = toNullable(data.avatar);
         this.roles = toNullable(data.roles);
@@ -105,6 +107,8 @@ export class Member {
                     break;
                 case "Avatar":
                     this.avatar = null;
+                    // @ts-ignore-next-line
+                    this.avatar_url = undefined;
                     break;
                 case "Roles":
                     this.roles = [];
@@ -250,7 +254,8 @@ export class Member {
      * @returns File URL
      */
     @computed generateAvatarURL(...args: FileArgs) {
-        return this.client.generateFileURL(this.avatar ?? undefined, ...args);
+        // @ts-ignore-next-line
+        return this.avatar_url ?? this.client.generateFileURL(this.avatar ?? undefined, ...args);
     }
 
     /**

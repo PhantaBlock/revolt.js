@@ -50,6 +50,8 @@ export class User {
         this.discriminator = data.discriminator;
         this.display_name = data.display_name;
 
+        // @ts-ignore-next-line
+        this.avatar_url = toNullable(data.avatar_url);
         this.avatar = toNullable(data.avatar);
         this.badges = toNullable(data.badges);
         this.status = toNullable(data.status);
@@ -87,6 +89,8 @@ export class User {
             switch (entry) {
                 case "Avatar":
                     this.avatar = null;
+                    // @ts-ignore-next-line
+                    this.avatar_url = undefined;
                     break;
                 case "StatusText": {
                     if (this.status) {
@@ -203,6 +207,8 @@ export class User {
 
     @computed generateAvatarURL(...args: FileArgs) {
         return (
+            // @ts-ignore-next-line
+            this.avatar_url ??
             this.client.generateFileURL(this.avatar ?? undefined, ...args) ??
             this.defaultAvatarURL
         );
