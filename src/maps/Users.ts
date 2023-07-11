@@ -108,6 +108,7 @@ export class User {
         apply("discriminator");
         apply("display_name");
         apply("avatar");
+        apply("avatar_url");
         apply("badges");
         apply("status");
         apply("relationship");
