@@ -257,7 +257,7 @@ export class WebSocketClient {
 
                                     if (
                                         packet.author !==
-                                            "00000000000000000000000000" &&
+                                        "00000000000000000000000000" &&
                                         !packet.webhook
                                     )
                                         await server.fetchMember(packet.author);
@@ -628,7 +628,7 @@ export class WebSocketClient {
                                 ].find(
                                     (channel) =>
                                         channel.channel_type ===
-                                            "DirectMessage" &&
+                                        "DirectMessage" &&
                                         channel.recipient_ids?.includes(
                                             user_id,
                                         ),
@@ -678,6 +678,10 @@ export class WebSocketClient {
                                     relationship: packet.status,
                                 });
                             } else {
+                                if (packet.status === "Incoming") {
+                                    packet.user.relationship = "Incoming"
+                                }
+
                                 this.client.users.createObj(packet.user);
                             }
 
