@@ -275,6 +275,10 @@ export class WebSocketClient {
                                         channel.active = true;
                                     }
 
+                                    if (message.author_id === this.client.user?._id) {
+                                        return;
+                                    }
+
                                     channel.last_message_id = message._id;
 
                                     if (
