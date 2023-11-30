@@ -61,6 +61,9 @@ export class User {
         this.flags = toNullable(data.flags);
         this.bot = toNullable(data.bot);
 
+        // @ts-ignore-next-line
+        this.vip = toNullable(data.vip);
+
         makeAutoObservable(this, {
             _id: false,
             client: false,
@@ -116,6 +119,7 @@ export class User {
         apply("privileged");
         apply("flags");
         apply("bot");
+        apply("vip");
     }
 
     /**

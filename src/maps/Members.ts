@@ -76,6 +76,9 @@ export class Member {
         this.roles = toNullable(data.roles);
         this.timeout = toNullableDate(data.timeout);
 
+        // @ts-ignore-next-line
+        this.vip = toNullableDate(data.vip);
+
         this.scheduleTimeout();
 
         makeAutoObservable(this, {
@@ -123,6 +126,7 @@ export class Member {
         apply("avatar");
         apply("roles");
         apply("timeout");
+        apply("vip");
 
         this.scheduleTimeout();
     }
