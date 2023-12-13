@@ -50,8 +50,6 @@ export class User {
         this.discriminator = data.discriminator;
         this.display_name = data.display_name;
 
-        // @ts-ignore-next-line
-        this.avatar_url = toNullable(data.avatar_url);
         this.avatar = toNullable(data.avatar);
         this.badges = toNullable(data.badges);
         this.status = toNullable(data.status);
@@ -62,7 +60,11 @@ export class User {
         this.bot = toNullable(data.bot);
 
         // @ts-ignore-next-line
+        this.avatar_url = toNullable(data.avatar_url);
+        // @ts-ignore-next-line
         this.vip = toNullable(data.vip);
+        // @ts-ignore-next-line
+        this.room_info = toNullable(data.room_info);
 
         makeAutoObservable(this, {
             _id: false,
@@ -104,6 +106,11 @@ export class User {
                 case "DisplayName":
                     this.display_name = null;
                     break;
+                // @ts-ignore
+                case "RoomInfo":
+                    // @ts-ignore-next-line
+                    this.room_info = null;
+                    break;
             }
         }
 
@@ -120,6 +127,7 @@ export class User {
         apply("flags");
         apply("bot");
         apply("vip");
+        apply("room_info");
     }
 
     /**

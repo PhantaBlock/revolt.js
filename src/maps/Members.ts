@@ -69,15 +69,17 @@ export class Member {
         this._id = data._id;
         this.joined_at = new Date(data.joined_at);
 
-        // @ts-ignore-next-line
-        this.avatar_url = toNullable(data.avatar_url);
         this.nickname = toNullable(data.nickname);
         this.avatar = toNullable(data.avatar);
         this.roles = toNullable(data.roles);
         this.timeout = toNullableDate(data.timeout);
 
         // @ts-ignore-next-line
+        this.avatar_url = toNullable(data.avatar_url);
+        // @ts-ignore-next-line
         this.vip = toNullableDate(data.vip);
+        // @ts-ignore-next-line
+        this.room_info = toNullableDate(data.room_info);
 
         this.scheduleTimeout();
 
@@ -119,6 +121,11 @@ export class Member {
                 case "Timeout":
                     this.timeout = null;
                     break;
+                // @ts-ignore
+                case "RoomInfo":
+                    // @ts-ignore-next-line
+                    this.room_info = null;
+                    break;
             }
         }
 
@@ -127,6 +134,7 @@ export class Member {
         apply("roles");
         apply("timeout");
         apply("vip");
+        apply("room_info");
 
         this.scheduleTimeout();
     }
