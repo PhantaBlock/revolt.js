@@ -522,7 +522,8 @@ export class WebSocketClient {
                         case "ServerMemberJoin": {
                             runInAction(async () => {
                                 await this.client.servers.fetch(packet.id);
-                                await this.client.users.fetch(packet.user);
+                                // 这个通知频率太高了，会打爆这个fetch，注释掉先
+                                // await this.client.users.fetch(packet.user);
 
                                 this.client.members.createObj(
                                     {
