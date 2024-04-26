@@ -238,10 +238,6 @@ export class WebSocketClient {
                                                 break;
                                         }
                                     }
-                                } else if (!packet.webhook) {
-                                    await this.client.users.fetch(
-                                        packet.author,
-                                    );
                                 }
 
                                 const channel =
@@ -249,18 +245,10 @@ export class WebSocketClient {
                                         packet.channel,
                                     );
 
-                                if (channel.channel_type === "TextChannel") {
-                                    const server =
-                                        await this.client.servers.fetch(
-                                            channel.server_id!,
-                                        );
-
-                                    if (
-                                        packet.author !==
-                                        "00000000000000000000000000" &&
-                                        !packet.webhook
-                                    )
-                                        await server.fetchMember(packet.author);
+                                if (channel.channel_type !== "TextChannel" && !packet.webhook) {
+                                    await this.client.users.fetch(
+                                        packet.author,
+                                    );
                                 }
 
                                 const message = this.client.messages.createObj(
